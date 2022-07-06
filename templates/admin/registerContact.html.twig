@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block title %}Les Contacts
+{% endblock %}
+{% block body %}
+	<section class="container my-3">
+		<div class="row">
+			<div class="col">
+				<h3>Enregistrer un Contact</h3>
+				<fieldset>
+					{{ form_start(form) }}
+					{{form_widget(form)}}
+				</fieldset>
+				<button type="submit" class="btn btn-primary btn-lg my-3">Enregistrer</button>
+				{{ form_end(form) }}
+			</div>
+		</div>
+	{% endblock %}

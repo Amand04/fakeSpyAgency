@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block title %}Les Spécialités
+{% endblock %}
+{% block body %}
+	<section class="container my-2">
+		<div class="row">
+			<div class="col">
+				<h1>Modifier une Spécialité</h1>
+				<fieldset>
+					{{ form_start(form) }}
+					{{form_widget(form)}}
+				</fieldset>
+				<button type="submit" class="btn btn-primary btn-lg my-3">Enregistrer</button>
+				{{ form_end(form) }}
+			</div>
+		</div>
+	{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+{% block title %}Les Spécialités
+{% endblock %}
+{% block body %}
+	<div class="container">
+		<h3 class="justify-content-center mt-5">Les Spécialités
+		</h3>
+	</div>
+	<div class="container d-flex flex-wrap">
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Nom</th>
+					<th scope="col">Modifier</th>
+					<th scope="col">Supprimer</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					{% for skill in skills %}
+						<td>{{ skill.name }}</td>
+						<td>
+							<a href="{{path('update_skill', {id: skill.id})}}">
+								<i class="fas fa-edit"></i>
+							</a>
+						</td>
+						<td>
+							<a href="{{path('delete_skill', {id: skill.id})}}">
+								<i class="fas fa-trash"></i>
+							</a>
+						</td>
+					</tr>
+				</tr>
+			</tbody>
+		{% endfor %}
+	</table>
+	{{ knp_pagination_render(skills)}}
+	<div class="container d-flex flex-wrap">
+		<a href="{{ path('app_registerSkill') }}" class="btn btn-primary mt-3">
+			Ajouter une Spécialité</a>
+	</div>
+</div></div>{% endblock %}

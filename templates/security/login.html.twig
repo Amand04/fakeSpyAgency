@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!
+{% endblock %}
+
+{% block body %}
+	<div class="mixed-vinyl-container p-3 text-center">
+		<img src="spy.jpg" data-src="" alt="image of a spy logo">
+		{% if error %}
+			<div class="alert alert-danger align-items-center">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+		{% endif %}
+		{% if app.user %}
+			<div class="mb-3">
+				Vous êtes déjà connecté en tant que
+				{{ app.user.userIdentifier }}
+				<a href="{{ path('app_logout') }}">Logout</a>
+			</div>
+		{% else %}
+			<div class="d-flex justify-content-center align-items-center container ">
+				<div class="row ">
+					<form method="post">
+						<div class="form-group">
+							<h1 class="h3 mb-3 font-weight-normal">Veuillez vous identifier</h1>
+							<label for="inputEmail">Email</label>
+							<input type="email" class="form-control" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+						</div>
+						<div class="form-group">
+							<label for="inputPassword">Mot de passe</label>
+							<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+						</div>
+						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+						<button class="btn btn-lg btn-primary m-3" type="submit">
+							Connexion
+						</button>
+					</div>
+				</form>
+			{% endif %}
+		{% endblock %}

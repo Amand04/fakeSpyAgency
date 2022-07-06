@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link
+		rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+		{% block stylesheets %}
+			<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+
+		{% block javascripts %}
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href=""></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="index">Les missions<span class="sr-only"></span>
+						</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link" href="agent/index">Les Agents</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="admin/target/index.html.twig">Les Cibles</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="admin/contact/index.html.twig">Les Contacts</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="admin/hideout/index.html.twig">Les Planques</a>
+					</li>
+				</ul>
+				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link" href="/deconnexion">Me déconnecter</a>
+					</li>
+					<div class="mb-3">
+						Vous êtes connecté(e) comme
+						{{ app.user.userIdentifier }}
+						<a href="{{ path('app_logout') }}">Déconnexion</a>
+					</div>
+				{% else %}
+					<li class="nav-item">
+						<a class="nav-link" href="/inscription">M'inscrire</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/connexion">Me connecter</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		{% block body %}{% endblock %}
+	</body>
+</html>

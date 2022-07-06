@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+{% block title %}Les Agents
+{% endblock %}
+{% block body %}
+	<div class="container">
+		<h3 class="justify-content-center mt-5">Les Agents
+		</h3>
+	</div>
+	<div class="container d-flex flex-wrap">
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">id</th>
+					<th scope="col">Nom</th>
+					<th scope="col">Prénom</th>
+					<th scope="col">Date de naissance</th>
+					<th scope="col">Code d'identification</th>
+					<th scope="col">Nationalité</th>
+					<th scope="col">Modifier</th>
+					<th scope="col">Supprimer</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for agent in agents %}
+					<tr>
+						<th scope="row">{{ agent.id }}</th>
+						<td>{{ agent.name }}</td>
+						<td>{{ agent.firstname }}</td>
+						<td>{{ agent.birthdayDate|date('Y-m-d H:i:s')  }}</td>
+						<td>{{ agent.code }}</td>
+						<td>{{ agent.nationality }}</td>
+						<td>
+							<a href="{{path('update_agent', {id: agent.id})}}">
+								<i class="fas fa-edit"></i>
+							</a>
+						</td>
+						<td>
+							<a href="{{path('delete_agent', {id: agent.id})}}">
+								<i class="fas fa-trash"></i>
+							</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{{ knp_pagination_render(agents)}}
+	</div>
+	<div class="container d-flex flex-wrap">
+		<a href="{{ path('app_registerAgent') }}" class="btn btn-primary mt-3">Ajouter un Agent</a>
+	</div>
+{% endblock %}

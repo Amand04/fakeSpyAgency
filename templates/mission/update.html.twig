@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block title %}Les Missions
+{% endblock %}
+{% block body %}
+	<section class="container my-3">
+		<div class="row">
+			<div class="col-7">
+				<h1>Modifier une Mission</h1>
+				<fieldset>
+					{{ form_start(form) }}
+					{{ form_row(form.title) }}
+					{{ form_row(form.description) }}
+					{{ form_row(form.nameCode) }}
+					{{ form_row(form.country, {'label': 'Pays'}) }}
+					{{ form_row(form.type, {'label': 'Type'}) }}
+					{{ form_row(form.status, {'label': 'Statut'}) }}
+					{{ form_row(form.created_at) }}
+					{{ form_row(form.closed_at) }}
+					{{ form_row(form.agent, {'label': 'Agent attitré'}) }}
+					{{ form_row(form.contact, {'label': 'Contact utilisé'}) }}
+					{{ form_row(form.target, {'label': 'Cible visée'}) }}
+					{{ form_row(form.hideout, {'label': 'Planque utilisée'}) }}
+				</fieldset>
+				<button type="submit" class="btn btn-primary btn-lg my-3">Enregistrer</button>
+			</div>
+			{{ form_end(form) }}
+		</div>
+	</tbody>
+</table>{% endblock %}

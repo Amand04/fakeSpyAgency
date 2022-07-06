@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block title %}Les Planques
+{% endblock %}
+{% block body %}
+	<section class="container my-2">
+		<div class="row">
+			<div class="col">
+				<h1>Modifier une Planque</h1>
+				<fieldset>
+					{{ form_start(form) }}
+					{{ form_row(form.code) }}
+					{{ form_row(form.adress) }}
+					{{ form_row(form.country) }}
+					{{ form_row(form.type) }}
+				</fieldset>
+				<button type="submit" class="btn btn-primary btn-lg my-3">Enregistrer</button>
+				{{ form_end(form) }}
+			</div>
+		</div>
+	{% endblock %}

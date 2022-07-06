@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block title %}Les Cibles
+{% endblock %}
+{% block body %}
+	<section class="container my-2">
+		<div class="row">
+			<div class="col">
+				<h1>Modifier une Cible</h1>
+				<fieldset>
+					{{ form_start(form) }}
+					{{ form_row(form.name) }}
+					{{ form_row(form.firstname) }}
+					{{ form_row(form.birthdayDate) }}
+					{{ form_row(form.nameCode) }}
+					{{ form_row(form.nationality, {'label': 'Pays'}) }}
+				</fieldset>
+				<button type="submit" class="btn btn-primary btn-lg my-3">Enregistrer</button>
+				{{ form_end(form) }}
+			</div>
+		</div>
+	{% endblock %}

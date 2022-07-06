@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+{% block title %}Les Missions
+{% endblock %}
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div class="col-4 align-self-start">
+				<div class="form-group m-3"></div>
+			</div>
+		</div>
+	</div>
+	<div class="container md-3">
+		<h3 class="justify-content-center mt-5">Les Missions</h3>
+	</div>
+	<div class="container d-flex flex-wrap">
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">id</th>
+					<th scope="col">Title</th>
+					<th scope="col">Description</th>
+					<th scope="col">Nom de code</th>
+					<th scope="col">Pays</th>
+					<th scope="col">Type</th>
+					<th scope="col">Status</th>
+					<th scope="col">Créée le</th>
+					<th scope="col">Clôturée le</th>
+					<th scope="col">Détails</th>
+					{% if is_granted('ROLE_ADMIN')  %}
+						<th scope="col">Modifier</th>
+						<th scope="col">Supprimer</th>
+					{% endif %}
+				</tr>
+			</thead>
+			{% for mission in missions %}
+				<tr>
+					<th scope="row">{{ mission.id }}
+					</th>
+					<td>{{ mission.title }}</td>
+					<td>{{ mission.description }}</td>
+					<td>{{ mission.nameCode }}</td>
+					<td>{{ mission.country }}</td>
+					<td>{{ mission.type }}</td>
+					<td>{{ mission.status }}</td>
+					<td>{{ mission.createdAt|date('Y-m-d H:i:s')  }}</td>
+					<td>{{ mission.closedAt|date('Y-m-d H:i:s')  }}</td>
+					<td>
+						<a href="{{path('app_detailMission', {id: mission.id})}}">Détails</a>
+					</td>
+					{% if is_granted('ROLE_ADMIN')  %}
+						<td>
+							<a href="{{path('update_mission', {id: mission.id})}}">
+								<i class="fas fa-edit"></i>
+							</a>
+						</td>
+						<td>
+							<a href="{{path('delete_mission', {id: mission.id})}}">
+								<i class="fas fa-trash"></i>
+							</a>
+						</td>
+					{% endif %}
+				</tr>
+			{% endfor %}
+		</table>
+		{{ knp_pagination_render(missions)}}
+	</div>
+	{% if is_granted('ROLE_ADMIN')  %}
+		<div class="container d-flex flex-wrap">
+			<a href="{{ path('app_registerMission') }}" class="btn btn-primary mt-3">Ajouter une mission</a>
+		</div>
+	{% endif %}
+{% endblock %}
