@@ -16,7 +16,7 @@ class AgentFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', TextType::class, ['constraints' => [new Length(['min' => 2])]], ['label' => 'Nom'])
+            ->add('lastname', TextType::class, ['constraints' => [new Length(['min' => 2])]], ['label' => 'Nom'])
             ->add('firstname', TextType::class, ['constraints' => [new Length(['min' => 2])]], ['label' => 'Prénom'])
             ->add('birthdayDate', BirthdayType::class, ['label' => 'Date de naissance'])
             ->add('code', TextType::class, ['constraints' => [new Length(['min' => 2])]], ['label' => 'Code d\'identification'])

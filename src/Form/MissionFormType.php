@@ -110,7 +110,7 @@ class MissionFormType extends AbstractType
                 'mapped' => false,
                 'class' => Agents::class,
                 'choice_label' => function ($agent) {
-                    return $agent->getName() . "(" . $agent->getNationality() . ")";
+                    return $agent->getLastname() . "(" . $agent->getNationality() . ")";
                 }, 'label' => 'Nom de l\'agent',
                 'multiple' => true,
                 'expanded' => true

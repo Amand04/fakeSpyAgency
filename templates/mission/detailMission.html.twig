@@ -20,9 +20,6 @@
 					<th scope="col">Clôturée le</th>
 					<th scope="col">Spécialité requise</th>
 					<th scope="col">Planque(s)</th>
-					<th scope="col">Agent(s)</th>
-					<th scope="col">Cible(s)</th>
-					<th scope="col">Contact(s)</th>
 				</tr>
 			</thead>
 			<tr>
@@ -38,21 +35,6 @@
 				<td>{{ mission.closedAt|date('Y-m-d H:i:s') }}</td>
 				<td>{{ mission.skills ?  mission.skills.id : "" }}</td>
 				<td>{{ mission.hideout ? mission.hideout.id : "" }}</td>
-				<td>
-					{% for agents in mission.agents %}
-						{{ agents.name }}
-					{% endfor %}
-				</td>
-				<td>
-					{% for targets in mission.targets %}
-						{{ target.name }}
-					{% endfor %}
-				</td>
-				<td>
-					{% for contacts in mission.contacts %}
-						{{ contacts.name }}
-					{% endfor %}
-				</td>
 			</tr>
 		</table>
 	</div>

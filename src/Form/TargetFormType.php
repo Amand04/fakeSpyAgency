@@ -15,7 +15,7 @@ class TargetFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', TextType::class, ['label' => 'Nom'])
+            ->add('lastname', TextType::class, ['label' => 'Nom'])
             ->add('firstname', TextType::class, ['label' => 'Prénom'])
             ->add('birthdayDate', BirthdayType::class, ['label' => 'Date de naissance'])
             ->add('nameCode', TextType::class, ['label' => 'Nom de code'])

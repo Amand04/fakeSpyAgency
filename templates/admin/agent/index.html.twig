@@ -24,7 +24,7 @@
 				{% for agent in agents %}
 					<tr>
 						<th scope="row">{{ agent.id }}</th>
-						<td>{{ agent.name }}</td>
+						<td>{{ agent.lastname }}</td>
 						<td>{{ agent.firstname }}</td>
 						<td>{{ agent.birthdayDate|date('Y-m-d H:i:s')  }}</td>
 						<td>{{ agent.code }}</td>

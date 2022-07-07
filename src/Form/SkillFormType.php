@@ -18,7 +18,7 @@ class SkillFormType extends AbstractType
             ->add('Name', TextType::class)
 
             ->add('agent', EntityType::class, ['mapped' => false, 'class' => Agents::class, 'choice_label' => function ($agent) {
-                return $agent->getName();
+                return $agent->getLastname();
             }, 'label' => 'Agent correspondant', 'multiple' => true, 'expanded' => true]);
     }
 
