@@ -23,7 +23,7 @@ final class Version20220707105715 extends AbstractMigration
         $this->addSql('DROP TABLE messenger_messages');
         $this->addSql('ALTER TABLE agents CHANGE name lastname VARCHAR(30) NOT NULL');
         $this->addSql('ALTER TABLE contacts CHANGE name lastname VARCHAR(30) NOT NULL');
-        $this->addSql('ALTER TABLE skills CHANGE name lastname VARCHAR(30) NOT NULL');
+        #$this->addSql('ALTER TABLE skills CHANGE name lastname VARCHAR(30) NOT NULL');
         $this->addSql('ALTER TABLE targets CHANGE name lastname VARCHAR(30) NOT NULL');
         $this->addSql('ALTER TABLE user CHANGE name lastname VARCHAR(30) NOT NULL');
     }
@@ -34,7 +34,7 @@ final class Version20220707105715 extends AbstractMigration
         $this->addSql('CREATE TABLE messenger_messages (id BIGINT AUTO_INCREMENT NOT NULL, body LONGTEXT CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`, headers LONGTEXT CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`, queue_name VARCHAR(190) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`, created_at DATETIME NOT NULL, available_at DATETIME NOT NULL, delivered_at DATETIME DEFAULT NULL, INDEX IDX_75EA56E016BA31DB (delivered_at), INDEX IDX_75EA56E0E3BD61CE (available_at), INDEX IDX_75EA56E0FB7336F0 (queue_name), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB COMMENT = \'\' ');
         $this->addSql('ALTER TABLE agents CHANGE lastname name VARCHAR(30) NOT NULL');
         $this->addSql('ALTER TABLE contacts CHANGE lastname name VARCHAR(30) NOT NULL');
-        $this->addSql('ALTER TABLE skills CHANGE lastname name VARCHAR(30) NOT NULL');
+        #$this->addSql('ALTER TABLE skills CHANGE lastname name VARCHAR(30) NOT NULL');
         $this->addSql('ALTER TABLE targets CHANGE lastname name VARCHAR(30) NOT NULL');
         $this->addSql('ALTER TABLE user CHANGE lastname name VARCHAR(30) NOT NULL');
     }
