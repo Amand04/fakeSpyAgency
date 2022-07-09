@@ -15,11 +15,7 @@ class SkillFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Name', TextType::class)
-
-            ->add('agent', EntityType::class, ['mapped' => false, 'class' => Agents::class, 'choice_label' => function ($agent) {
-                return $agent->getLastname();
-            }, 'label' => 'Agent correspondant', 'multiple' => true, 'expanded' => true]);
+            ->add('Name', TextType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

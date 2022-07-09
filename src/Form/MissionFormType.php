@@ -75,14 +75,13 @@ class MissionFormType extends AbstractType
             ])
 
             ->add(
-                'speciality',
+                'skills',
                 EntityType::class,
                 [
-                    'mapped' => false, 'class' => Skills::class,
-                    'choice_label' => function ($skill) {
-                        return $skill->getName();
-                    }, 'label' => 'Spécialité',
-                    'multiple' => true, 'expanded' => true
+                    'class' => Skills::class,
+                    'choice_label' => 'name',
+                    'label' => 'Spécialité'
+
                 ]
             )
 
@@ -106,35 +105,39 @@ class MissionFormType extends AbstractType
                 ]
             )
 
-            ->add('agent', EntityType::class, [
-                'mapped' => false,
-                'class' => Agents::class,
-                'choice_label' => function ($agent) {
-                    return $agent->getLastname() . "(" . $agent->getNationality() . ")";
-                }, 'label' => 'Nom de l\'agent',
-                'multiple' => true,
-                'expanded' => true
-            ])
-
             ->add(
-                'contact',
+                'agents',
                 EntityType::class,
                 [
-                    'mapped' => false, 'class' => Contacts::class,
-                    'choice_label' => function ($contact) {
-                        return $contact->getNameCode() . "(" . $contact->getNationality() . ")";
-                    }, 'label' => 'Nom de code du Contact',
-                    'multiple' => true, 'expanded' => true
+
+                    'choice_label' => function ($agents) {
+                        return $agents->getCode() . "(" . $agents->getNationality() . " & " . implode(",", $agents->displaySkills()) . ")";
+                    }, 'class' => Agents::class,
+                    'label' => 'Agent',
+                    'multiple' => true, 'expanded' => true,
+
+
                 ]
             )
 
             ->add(
-                'target',
+                'contacts',
                 EntityType::class,
                 [
-                    'mapped' => false, 'class' => Targets::class, 'choice_label' => function ($target) {
-                        return $target->getNameCode() . "(" . $target->getNationality() . ")";
-                    }, 'label' => 'Nom de code de la Cible',
+                    'class' => Contacts::class,
+                    'choice_label' => function ($contacts) {
+                        return $contacts->getNameCode() . "(" . $contacts->getNationality() . ")";
+                    }, 'multiple' => true, 'expanded' => true
+                ]
+            )
+
+            ->add(
+                'targets',
+                EntityType::class,
+                [
+                    'class' => Targets::class, 'choice_label' => function ($targets) {
+                        return $targets->getNameCode() . "(" . $targets->getNationality() . ")";
+                    },
                     'multiple' => true, 'expanded' => true
                 ]
             )
@@ -143,10 +146,12 @@ class MissionFormType extends AbstractType
                 'hideout',
                 EntityType::class,
                 [
-                    'mapped' => false, 'class' => Hideout::class, 'choice_label' => function ($hideout) {
-                        return $hideout->getId() . "(" . $hideout->getCountry() . ")";
-                    }, 'label' => 'Code Planque',
-                    'multiple' => true, 'expanded' => true
+                    'class' => Hideout::class,
+                    'choice_label' => function ($hideout) {
+                        return $hideout->getCode() . "(" . $hideout->getCountry() . ")";
+                    },
+                    'label' => 'Planque'
+
                 ]
             );
     }

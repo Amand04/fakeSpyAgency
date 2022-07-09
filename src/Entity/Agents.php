@@ -199,4 +199,15 @@ class Agents
 
         return $this;
     }
+
+    public function displaySkills()
+    {
+        $agentsSkills = $this->skills;
+        $skillsList = [];
+
+        foreach ($agentsSkills as $skill) {
+            $skillsList[] = $skill->getName();
+        }
+        return $skillsList;
+    }
 }

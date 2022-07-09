@@ -21,20 +21,26 @@ class MissionsController extends AbstractController
     public function register(Request $request, EntityManagerInterface $entityManager): Response
     {
         $mission = new Missions();
+
         $form = $this->createForm(MissionFormType::class, $mission);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             if (!$mission->missionValid()) {
-                $this->addFlash('Erreur',  'la ou les cibles ne peuvent pas avoir la même nationalité que le ou les agents, les contacts sont obligatoirement de la nationalité du pays de la mission, il faut assigner au moins 1 agent disposant de la spécialité requise!  ');
-                return $this->redirectToRoute('app_missionIndex');
-            }
+                $this->addFlash(
+                    'alert',
+                    '! La mission ne peut être enregistrée, conditions: nationalité cible = nationalité agent, nationalité contact = pays mission, pays planque = pays mission, spécialité agent = spécialité mission !'
+                );
+                return $this->redirectToRoute("app_missionIndex");
+            };
+
             $form->getData();
             $entityManager->persist($mission);
             $entityManager->flush();
+
             return $this->redirectToRoute("app_missionIndex");
         }
+
         return $this->render('admin/registerMission.html.twig', [
             'form' => $form->createView(),
         ]);

@@ -43,7 +43,7 @@ class AgentsController extends AbstractController
     public function index(Request $request, ManagerRegistry $doctrine, PaginatorInterface $paginator): Response
     {
         $agents = $doctrine->getRepository(Agents::class)->findAll();
-        $skill = $doctrine->getRepository(Skills::class)->findAll();
+
 
         $agents = $paginator->paginate(
             $agents,
@@ -55,7 +55,7 @@ class AgentsController extends AbstractController
             'admin/agent/index.html.twig',
             [
                 "agents" => $agents,
-                "skill" => $skill,
+
             ]
         );
     }

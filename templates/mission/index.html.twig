@@ -2,17 +2,10 @@
 {% block title %}Les Missions
 {% endblock %}
 {% block body %}
-	<div class="container">
-		<div class="row">
-			<div class="col-4 align-self-start">
-				<div class="form-group m-3"></div>
-			</div>
-		</div>
-	</div>
-	<div class="container md-3">
+	<div class="container justify-content-center">
 		<h3 class="justify-content-center mt-5">Les Missions</h3>
 	</div>
-	<div class="container d-flex flex-wrap">
+	<div class="text-center m-5">
 		<table class="table">
 			<thead>
 				<tr>
@@ -25,6 +18,8 @@
 					<th scope="col">Status</th>
 					<th scope="col">Créée le</th>
 					<th scope="col">Clôturée le</th>
+					<th scope="col">Spécialité</th>
+					<th scope="col">Planque</th>
 					<th scope="col">Détails</th>
 					{% if is_granted('ROLE_ADMIN')  %}
 						<th scope="col">Modifier</th>
@@ -44,6 +39,9 @@
 					<td>{{ mission.status }}</td>
 					<td>{{ mission.createdAt|date('Y-m-d H:i:s')  }}</td>
 					<td>{{ mission.closedAt|date('Y-m-d H:i:s')  }}</td>
+
+					<td>{{ mission.skills.id }}</td>
+					<td>{{ mission.hideout.id }}</td>
 					<td>
 						<a href="{{path('app_detailMission', {id: mission.id})}}">Détails</a>
 					</td>

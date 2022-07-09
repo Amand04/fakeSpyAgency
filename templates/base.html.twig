@@ -73,7 +73,17 @@
 						</div>
 					{% endif %}
 				</div>
-			</div>
-		</nav>
+
+			</nav>
+		</div>
+
 	</body>
-</html></body></html></body></html></div>{% block body %}</body></html></body></html>{% endblock %}
+</html>
+
+
+{% for label, message in app.flashes('alert') %}
+	<div class="alert alert-alert">
+		{{ message }}
+	</div>
+{% endfor %}
+{% block body %}{% endblock %}

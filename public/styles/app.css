@@ -7,3 +7,7 @@ body {
 .table {
   color: rgb(222, 224, 226);
 }
+
+.alert {
+  color: red;
+}
