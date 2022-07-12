@@ -109,13 +109,12 @@ class MissionFormType extends AbstractType
                 'agents',
                 EntityType::class,
                 [
-
+                    'class' => Agents::class,
                     'choice_label' => function ($agents) {
                         return $agents->getCode() . "(" . $agents->getNationality() . " & " . implode(",", $agents->displaySkills()) . ")";
-                    }, 'class' => Agents::class,
+                    },
                     'label' => 'Agent',
                     'multiple' => true, 'expanded' => true,
-
 
                 ]
             )
@@ -146,11 +145,10 @@ class MissionFormType extends AbstractType
                 'hideout',
                 EntityType::class,
                 [
-                    'class' => Hideout::class,
                     'choice_label' => function ($hideout) {
                         return $hideout->getCode() . "(" . $hideout->getCountry() . ")";
-                    },
-                    'label' => 'Planque'
+                    }, 'class' => Hideout::class,
+                    'multiple' => false, 'expanded' => true
 
                 ]
             );

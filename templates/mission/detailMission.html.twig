@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
-{% block title %}Les Missions
+{% block title %}Détail de la Mission
+	{{ mission.id }}
 {% endblock %}
 {% block body %}
 	<div class="container md-3">
-		<h3 class="justify-content-center mt-5">Les Missions</h3>
+		<h3 class="justify-content-center mt-5">Détail de la Mission n°{{ mission.id }}</h3>
 	</div>
-	<div class="container d-flex flex-wrap">
+	<div class="m-5 ">
 		<table class="table">
 			<thead>
 				<tr>
@@ -22,6 +23,7 @@
 					<th scope="col">Planque(s)</th>
 					<th scope="col">Agent</th>
 					<th scope="col">Contact</th>
+					<th scope="col">Cible</th>
 				</tr>
 			</thead>
 			<tr>
@@ -35,11 +37,11 @@
 				<td>{{ mission.status }}</td>
 				<td>{{ mission.createdAt|date('Y-m-d H:i:s') }}</td>
 				<td>{{ mission.closedAt|date('Y-m-d H:i:s') }}</td>
-				<td>{{ mission.skills.id }}</td>
-				<td>{{ mission.hideout ? mission.hideout.id : "" }}</td>
+				<td>{{ mission.skills.name }}</td>
+				<td>{{ mission.hideout ? mission.hideout.code : "" }}</td>
 				<td>
-					{% for agent in mission.agents %}
-						{{ agent.code
+					{% for agents in mission.agents %}
+						{{ agents.code
 						 }}
 					{% endfor %}
 				</td>
@@ -49,7 +51,16 @@
 						 }}
 					{% endfor %}
 				</td>
+				<td>
+					{% for targets in mission.targets %}
+						{{ targets.namecode
+						 }}
+					{% endfor %}
+				</td>
 			</tr>
 		</td>
 	</tr>
-</table></div></div>{% endblock %}
+</table>
+<div class="container d-flex flex-wrap">
+	<a href="{{ path('app_missionIndex') }}" class="btn btn-primary mt-3">Retour à la liste des missions</a>
+</div></div></div>{% endblock %}

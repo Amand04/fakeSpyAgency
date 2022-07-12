@@ -70,14 +70,14 @@ class Agents
     private $nationality;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Missions::class, inversedBy="agents")
-     */
-    private $missions;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Skills::class, inversedBy="agents")
      */
     private $skills;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Missions::class, mappedBy="agents")
+     */
+    private $missions;
 
 
 
@@ -153,30 +153,6 @@ class Agents
     }
 
     /**
-     * @return Collection<int, Missions>
-     */
-    public function getMissions(): Collection
-    {
-        return $this->missions;
-    }
-
-    public function addMission(Missions $mission): self
-    {
-        if (!$this->missions->contains($mission)) {
-            $this->missions[] = $mission;
-        }
-
-        return $this;
-    }
-
-    public function removeMission(Missions $mission): self
-    {
-        $this->missions->removeElement($mission);
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Skills>
      */
     public function getSkills(): Collection
@@ -196,6 +172,33 @@ class Agents
     public function removeSkill(Skills $skill): self
     {
         $this->skills->removeElement($skill);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Missions>
+     */
+    public function getMissions(): Collection
+    {
+        return $this->missions;
+    }
+
+    public function addMission(Missions $mission): self
+    {
+        if (!$this->missions->contains($mission)) {
+            $this->missions[] = $mission;
+            $mission->addAgent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMission(Missions $mission): self
+    {
+        if ($this->missions->removeElement($mission)) {
+            $mission->removeAgent($this);
+        }
 
         return $this;
     }

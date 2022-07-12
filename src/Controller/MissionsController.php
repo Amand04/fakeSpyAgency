@@ -29,11 +29,10 @@ class MissionsController extends AbstractController
             if (!$mission->missionValid()) {
                 $this->addFlash(
                     'alert',
-                    '! La mission ne peut être enregistrée, conditions: nationalité cible = nationalité agent, nationalité contact = pays mission, pays planque = pays mission, spécialité agent = spécialité mission !'
+                    '! La mission ne peut être enregistrée, conditions: nationalité cible != nationalité agent, nationalité contact = pays mission, pays planque = pays mission, spécialité agent = spécialité mission !'
                 );
                 return $this->redirectToRoute("app_missionIndex");
             };
-
             $form->getData();
             $entityManager->persist($mission);
             $entityManager->flush();
@@ -41,8 +40,10 @@ class MissionsController extends AbstractController
             return $this->redirectToRoute("app_missionIndex");
         }
 
-        return $this->render('admin/registerMission.html.twig', [
-            'form' => $form->createView(),
+
+        return $this->renderForm('admin/registerMission.html.twig', [
+            'mission' => $mission,
+            'form' => $form
         ]);
     }
 
@@ -75,6 +76,14 @@ class MissionsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if (!$mission->missionValid()) {
+                $this->addFlash(
+                    'alert',
+                    '! La mission ne peut être modifiée, conditions: nationalité cible != nationalité agent, nationalité contact = pays mission, pays planque = pays mission, spécialité agent = spécialité mission !'
+                );
+                return $this->redirectToRoute("app_missionIndex");
+            }
+
             $missions = $doctrine->getManager()->flush();
 
             return $this->redirectToRoute("app_missionIndex");

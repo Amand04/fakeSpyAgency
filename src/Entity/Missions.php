@@ -102,11 +102,6 @@ class Missions
      */
     private $targets;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Agents::class, mappedBy="missions")
-     */
-    private $agents;
-
 
 
     /**
@@ -118,6 +113,11 @@ class Missions
      * @ORM\ManyToOne(targetEntity=Hideout::class, inversedBy="missions")
      */
     private $hideout;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Agents::class, inversedBy="missions")
+     */
+    private $agents;
 
 
     public function __construct()
@@ -276,32 +276,7 @@ class Missions
         return $this;
     }
 
-    /**
-     * @return Collection<int, Agents>
-     */
-    public function getAgents(): Collection
-    {
-        return $this->agents;
-    }
 
-    public function addAgent(Agents $agent): self
-    {
-        if (!$this->agents->contains($agent)) {
-            $this->agents[] = $agent;
-            $agent->addMission($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAgent(Agents $agent): self
-    {
-        if ($this->agents->removeElement($agent)) {
-            $agent->removeMission($this);
-        }
-
-        return $this;
-    }
 
     public function getSkills(): ?Skills
     {
@@ -327,16 +302,39 @@ class Missions
         return $this;
     }
 
-    public function contactsValid()
+    /**
+     * @return Collection<int, Agents>
+     */
+    public function getAgents(): Collection
     {
-        $dataContacts = $this->contacts;
-        $dataCountry = $this->country;
+        return $this->agents;
+    }
 
-        foreach ($dataContacts as $contact) {
-            if ($dataCountry != $contact->getNationality()) {
-                return false;
-            }
+    public function addAgent(Agents $agent): self
+    {
+        if (!$this->agents->contains($agent)) {
+            $this->agents[] = $agent;
         }
+
+        return $this;
+    }
+
+    public function removeAgent(Agents $agent): self
+    {
+        $this->agents->removeElement($agent);
+
+        return $this;
+    }
+
+    public function hideoutValid()
+    {
+        $dataCountry = $this->country;
+        $dataHideout = $this->hideout;
+
+        if ($dataCountry != $dataHideout->getCountry()) {
+            return false;
+        }
+
         return true;
     }
 
@@ -365,17 +363,36 @@ class Missions
         $dataTargets = $this->targets;
 
         foreach ($dataAgents as $agent) {
-            foreach ($dataTargets as $target)
-                if ($agent->getNationality() != $target->getNationality()) {
+            foreach ($dataTargets as $target) {
+                if ($agent->getNationality() == $target->getNationality()) {
                     return false;
                 }
+            }
         }
         return true;
     }
 
+    public function contactsValid()
+    {
+        $dataContacts = $this->contacts;
+        $dataCountry = $this->country;
+
+        foreach ($dataContacts as $contact) {
+            if ($dataCountry != $contact->getNationality()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+
+
+
+
     public function missionValid()
     {
-        if (!$this->contactsValid() || !$this->agentsSkillsValid() || !$this->agentsNationalityValid()) {
+        if (!$this->contactsValid() || !$this->hideoutValid() || !$this->agentsSkillsValid() || !$this->agentsNationalityValid()) {
             return false;
         }
         return true;
