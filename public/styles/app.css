@@ -9,5 +9,7 @@ body {
 }
 
 .alert {
-  color: red;
+  color: azure;
+  background-color: rgb(226, 48, 48);
+  width: 60rem;
 }

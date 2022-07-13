@@ -80,10 +80,11 @@
 	</body>
 </html>
 
-
-{% for label, message in app.flashes('alert') %}
-	<div class="alert alert-alert">
-		{{ message }}
-	</div>
-{% endfor %}
+<div class="container justify-content-center">
+	{% for label, message in app.flashes('alert') %}
+		<div class="alert alert-alert">
+			{{ message }}
+		</div>
+	{% endfor %}
+</div>
 {% block body %}{% endblock %}
