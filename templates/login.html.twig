@@ -4,8 +4,9 @@
 {% endblock %}
 
 {% block body %}
+	<img src="spy.jpg" data-src="" alt="image of a spy logo" id="img_login">
 	<div class="mixed-vinyl-container p-3 text-center">
-		<img src="spy.jpg" data-src="" alt="image of a spy logo">
+
 		{% if error %}
 			<div class="alert alert-danger align-items-center">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 		{% endif %}
