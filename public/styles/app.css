@@ -19,6 +19,16 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+.container-fluid {
+  padding: 0px;
+}
+.navbar-toggler {
+  background-color: #fbfbfc;
+}
+
+.navbar-toggler {
+  background-color: #0c0c0c;
+}
 
 @media screen and (max-width: 625px) {
   #img_login {

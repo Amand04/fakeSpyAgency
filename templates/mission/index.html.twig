@@ -11,15 +11,10 @@
 				<tr>
 					<th scope="col">id</th>
 					<th scope="col">Title</th>
-					<th scope="col">Description</th>
 					<th scope="col">Nom de code</th>
-					<th scope="col">Pays</th>
 					<th scope="col">Type</th>
 					<th scope="col">Status</th>
-					<th scope="col">Créée le</th>
-					<th scope="col">Clôturée le</th>
 					<th scope="col">Spécialité</th>
-					<th scope="col">Planque</th>
 					<th scope="col">Détails</th>
 					{% if is_granted('ROLE_ADMIN')  %}
 						<th scope="col">Modifier</th>
@@ -32,16 +27,10 @@
 					<th scope="row">{{ mission.id }}
 					</th>
 					<td>{{ mission.title }}</td>
-					<td>{{ mission.description }}</td>
 					<td>{{ mission.nameCode }}</td>
-					<td>{{ mission.country }}</td>
 					<td>{{ mission.type }}</td>
 					<td>{{ mission.status }}</td>
-					<td>{{ mission.createdAt|date('Y-m-d H:i:s')  }}</td>
-					<td>{{ mission.closedAt|date('Y-m-d H:i:s')  }}</td>
-
 					<td>{{ mission.skills.id }}</td>
-					<td>{{ mission.hideout.id }}</td>
 					<td>
 						<a href="{{path('app_detailMission', {id: mission.id})}}">Détails</a>
 					</td>
